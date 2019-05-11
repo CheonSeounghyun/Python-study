@@ -1,35 +1,25 @@
 '''
-상근이는 요즘 설탕공장에서 설탕을 배달하고 있다. 상근이는 지금 사탕가게에 설탕을 정확하게 N킬로그램을 배달해야 한다. 설탕공장에서 만드는 설탕은 봉지에 담겨져 있다. 봉지는 3킬로그램 봉지와 5킬로그램 봉지가 있다.
+Mirko works in a sugar factory as a delivery boy. He has just received an order: he has to deliver exactly N kilograms of sugar to a candy store on the Adriatic coast. Mirko can use two types of packages, the ones that contain 3 kilograms, and the ones with 5 kilograms of sugar.
 
-상근이는 귀찮기 때문에, 최대한 적은 봉지를 들고 가려고 한다. 예를 들어, 18킬로그램 설탕을 배달해야 할 때, 3킬로그램 봉지 6개를 가져가도 되지만, 5킬로그램 3개와 3킬로그램 1개를 배달하면, 더 적은 개수의 봉지를 배달할 수 있다.
+Mirko would like to take as few packages as possible. For example, if he has to deliver 18 kilograms of sugar, he could use six 3-kilogram packages. But, it would be better to use three 5-kilogram packages, and one 3-kilogram package, resulting in the total of four packages.
 
-상근이가 설탕을 정확하게 N킬로그램 배달해야 할 때, 봉지 몇 개를 가져가면 되는지 그 수를 구하는 프로그램을 작성하시오.
-
-1. 5로 딱 나누어 떨어질때
-2. 5로 나누고 나머지가 3으로 나누어 떨어질때
-3. 5로 나누고 나머지가 3으로 나누어 떨어지지 않을때 -> -1 출력
+Help Mirko by finding the minimum number of packages required to transport exactly N kilograms of sugar.
 '''
 
-N = int(input()) # 설탕 무게
-C = 0 # 설탕 봉지 갯수
+N = int(input())
+C = 0  # count
 
-# 5로 나누어 떨어지면 5로 나눈 몫을 출력
-if N % 5 == 0:
-    C = N // 5
-    print(C)
-# 5로 나누고 나머지가 3으로 나누어 떨어지면 몫을 더해서 출력
-elif (N % 5) != 0 and (N % 5) % 3 == 0:
-    C = N // 5
-    B = N % 5
-    C2 = B // 3
-    C = C + C2
-    print(C)
-# 5로 나누어 떨어지지 않고 3으로 나누어 떨어지면 3으로 나눈 몫 출력
-elif (N % 5) != 0 and N % 3 == 0:
-    C = N // 3
-    print(C)
-# 5로 나누고 나머지가 3으로 나누어 떨어지지 않으면 -1 출력
-elif(N % 5) != 0 and (N % 5) % 3 != 0:
-    print('-1')
-else:
-    print('-1')
+while N > 0:
+    if N % 5 == 0:
+        N -= 5
+        C = C + 1
+    elif N % 3 == 0:
+        N -= 3
+        C = C + 1
+    elif N > 5:
+        N -= 5
+        C = C + 1
+    else:
+        C = -1
+        break
+print(C)
